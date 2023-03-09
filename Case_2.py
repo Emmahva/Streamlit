@@ -554,7 +554,7 @@ def main():
     st.title('Flight Counts')
     show_trendline = st.checkbox('Show line')
     create_histogram("Flight", show_trendline)
-st.set_option('deprecation.showPyplotGlobalUse', False)    
+ 
 main()
     
 
