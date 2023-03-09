@@ -406,9 +406,9 @@ st.text("Via onderstaande sliders kan er een bepaalde range van vluchtlengte gek
 
 
 def multiply60(num):
-    decimal_part = num - int(num)   # extract the decimal part of the number
-    new_decimal_part = decimal_part * 60   # multiply the decimal part by 60
-    new_num = int(num) + new_decimal_part/100   # add the new decimal part back to the integer part
+    decimal_part = num - int(num)   
+    new_decimal_part = decimal_part * 60   
+    new_num = int(num) + new_decimal_part/100   
     return round(new_num,2)
 
 
@@ -417,78 +417,39 @@ def multiply60(num):
 
 df123 = Dayselect.copy()
 
-# Convert Length column to hours and round to 2 decimal places
+
 df123['Length'] = round((df123['Length']/60), 2)
 
-# Define minimum and maximum values for Length slider
+
 min_len = float(df123['Length'].min())
 max_len = float(df123['Length'].max())
 
-# Create Length slider
 selected_min_len, selected_max_len = st.slider(
     'Select a range of flight length in hours:',
     min_value=min_len, max_value=max_len, value=(min_len, max_len))
 
-# Convert Time column to hours and multiply by 60
 df123['Time'] = round((df123['Time']/60), 2)
 df123['Time'] = df123['Time'].apply(multiply60)
 
-# Define minimum and maximum values for Time slider
+
 min_len_time = float(df123['Time'].min())
 max_len_time = float(df123['Time'].max())
 
 
-
-# Create Time slider
 selected_min_len_time, selected_max_len_time = st.slider(
     'Select a range of departures:',
     min_value=min_len_time, max_value=max_len_time, value=(min_len_time, max_len_time))
 
-# Filter dataframe based on Length and Time sliders
 filtered_df = df123[(df123['Length'] >= selected_min_len) & (df123['Length'] <= selected_max_len)]
 filtered_df1 = filtered_df[(filtered_df['Time'] >= selected_min_len_time) & (filtered_df['Time'] <= selected_max_len_time)]
 
 # Display filtered dataframe
 st.write(f"Flights with length between {round(selected_min_len, 2)}h and {round(selected_max_len, 2)}h:")
-st.write(f"Flights with length between {selected_min_len_time} and {selected_max_len_time}:")
+st.write(f"Flights with departure time between {selected_min_len_time} and {selected_max_len_time}:")
 st.write(filtered_df1)
 
 
-# In[1573]:
 
-
-# df123 = Dayselect.copy()
-
-
-# df123['Length'] = round((df123['Length']/60),2)
-
-# min_len = df123['Length'].min()
-# max_len = df123['Length'].max()
-
-# selected_min_len, selected_max_len = st.slider(
-#     'Select a range of flight length in hour:',
-#     min_value=min_len, max_value=max_len, value=(min_len, max_len))
-
-# df123['Time'] = round((df123['Time']/60),2)
-# df123['Time'] = df123['Time'].apply(multiply60)
-
-
-# min_len_time = df123['Time'].min()
-# max_len_time = df123['Time'].max()
-
-# selected_min_len_time, selected_max_len_time = st.slider(
-#     'Select a range of depatures:',
-#     min_value=min_len_time, max_value=max_len_time, value=(min_len_time, max_len_time))
-
-# st.write(f"Flights with length between {round(selected_min_len,2)}h and {round(selected_max_len,2)}h:")
-# filtered_df = df123[(df123['Length'] >= selected_min_len) & (df123['Length'] <= selected_max_len)]
-
-# st.write(f"Flights with length between {(selected_min_len_time)} and {(selected_max_len_time)}:")
-# filtered_df1 = filtered_df[(filtered_df['Time'] >= selected_min_len_time) & (filtered_df['Time'] <= selected_max_len_time)]
-# st.write(filtered_df1)
-
-
-# In[1574]:
 
 
 st.text("Op basis van de bovenstaande gekozen ranges wordt ook de map geupdate met deze vluchten.")
