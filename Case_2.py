@@ -557,7 +557,7 @@ def main():
  
 main()
     
-
+st.set_option('deprecation.showPyplotGlobalUse', False) 
 
 
 # In[ ]:
