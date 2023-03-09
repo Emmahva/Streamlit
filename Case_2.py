@@ -50,7 +50,7 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 import folium
-import matplotlib.pyplot as 
+import matplotlib.pyplot as plt
 from streamlit_folium import folium_static
 import altair as alt
 import seaborn as sns
